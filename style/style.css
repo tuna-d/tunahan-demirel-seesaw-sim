@@ -99,6 +99,7 @@ main {
   align-items: center;
   padding-bottom: 6rem;
   user-select: none;
+  position: relative;
 }
 
 #bar {
@@ -145,4 +146,32 @@ main {
   box-sizing: content-box;
   white-space: nowrap;
   pointer-events: none;
+}
+
+#indicatorDiv {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.6;
+  top: 35%;
+  min-height: 200px;
+}
+
+#weightInd {
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border: 1px white solid;
+  flex-grow: 0;
+  background-color: magenta;
+}
+
+#lineInd {
+  width: 2px;
+  height: 60px;
+  flex-grow: 1;
+  background-color: magenta;
 }
