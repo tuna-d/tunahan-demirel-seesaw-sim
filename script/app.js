@@ -8,6 +8,9 @@ const indicatorDiv = document.getElementById("indicatorDiv")
 const indicatorSec = document.getElementById("indicatorSec")
 const weightInd = document.getElementById("weightInd")
 const lineInd = document.getElementById("lineInd")
+const switchDiv = document.getElementById("switch")
+const toggleDiv = document.getElementById("toggle")
+const slider = document.getElementById("slider")
 
 const colors = [
   "#fbf8cc",
@@ -31,6 +34,8 @@ let rightKg = 0
 let rightTor = 0
 
 let angle = 0
+
+let randomWeightsOpt = true
 
 randomKg()
 colorPicker()
@@ -59,12 +64,33 @@ bar.addEventListener("click", (e) => {
   createIndicator(kg, indPos, color)
 
   tiltBar(rightTor, leftTor)
-  randomKg()
+  randomWeightsOpt ? randomKg() : sliderKg()
 })
 
 simSec.addEventListener("mousemove", (e) => {
   const dist = updateIndicatorPos(e)
   createIndicator(kg, dist, color)
+})
+
+toggleDiv.addEventListener("click", (e) => {
+  switchDiv.classList.toggle("switchOn")
+  toggleDiv.classList.toggle("toggleOn")
+
+  randomWeightsOpt = !randomWeightsOpt
+
+  slider.disabled = randomWeightsOpt
+
+  if (randomWeightsOpt) {
+    randomKg()
+  } else {
+    sliderKg()
+  }
+})
+
+slider.addEventListener("input", (e) => {
+  if (!randomWeightsOpt) {
+    sliderKg()
+  }
 })
 
 function setKg(value) {
@@ -75,6 +101,12 @@ function setKg(value) {
 function randomKg() {
   const randKg = Math.floor(Math.random() * 10 + 1)
   setKg(randKg)
+}
+
+function sliderKg() {
+  const sliderKg = parseInt(slider.value, 10)
+  setKg(sliderKg)
+  nextWeightInfo.innerHTML = `${sliderKg} kg`
 }
 
 function createWeight(weight, position, color) {
