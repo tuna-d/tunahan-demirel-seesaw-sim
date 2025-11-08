@@ -109,7 +109,6 @@ main {
   display: flex;
   position: relative;
   align-items: center;
-  transition: transform ease-in-out 2s;
   z-index: 2;
 }
 
@@ -121,6 +120,7 @@ main {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  pointer-events: none;
 }
 
 #fulcrum {
@@ -144,4 +144,5 @@ main {
   font-size: small;
   box-sizing: content-box;
   white-space: nowrap;
+  pointer-events: none;
 }

@@ -1,19 +1,47 @@
 const bar = document.getElementById("bar")
 const simSec = document.getElementById("simSec")
+const leftWeightInfo = document.getElementById("leftWeight")
+const nextWeightInfo = document.getElementById("nextWeight")
+const rightWeightInfo = document.getElementById("rightWeight")
+const tiltAngleInfo = document.getElementById("tiltAngle")
 
 let kg
+let leftKg = 0
+let leftTor = 0
+
+let rightKg = 0
+let rightTor = 0
+
+let angle = 0
 
 randomKg()
 
+const midPoint = bar.getBoundingClientRect().width / 2
+
 bar.addEventListener("click", (e) => {
-  const bound = bar.getBoundingClientRect()
-  const dist = e.clientX - bound.left
-  randomKg()
+  const dist = e.offsetX
+  const distDiff = Math.abs(dist - midPoint)
+
+  if (dist > midPoint) {
+    rightKg += kg
+    rightTor += distDiff * kg
+  } else if (dist < midPoint) {
+    leftKg += kg
+    leftTor += distDiff * kg
+  }
+
+  leftWeightInfo.innerHTML = `${leftKg} kg`
+  rightWeightInfo.innerHTML = `${rightKg} kg`
+
   createWeight(kg, dist)
+
+  tiltBar(rightTor, leftTor)
+  randomKg()
 })
 
 function setKg(value) {
   kg = value
+  nextWeightInfo.innerHTML = `${kg} kg`
 }
 
 function randomKg() {
@@ -37,4 +65,16 @@ function createWeight(weight, position) {
   weightDiv.style.left = `${position - totalSize / 2}px`
 
   bar.appendChild(weightDiv)
+}
+
+function tiltBar(rightTorque, leftTorque) {
+  const torqueDiff = rightTorque - leftTorque
+  angle = Math.max(-30, Math.min(30, torqueDiff / 10))
+
+  const tiltDuration = 3000 - Math.min(1500, Math.abs(torqueDiff)) //ms
+
+  bar.style.transform = `rotate(${angle}deg)`
+  bar.style.transition = `transform ${tiltDuration}ms ease`
+
+  tiltAngleInfo.innerHTML = `${parseInt(angle, 10)}°`
 }
