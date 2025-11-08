@@ -99,7 +99,6 @@ main {
   align-items: center;
   padding-bottom: 6rem;
   user-select: none;
-  position: relative;
 }
 
 #bar {
@@ -111,6 +110,7 @@ main {
   position: relative;
   align-items: center;
   z-index: 2;
+  cursor: pointer;
 }
 
 #hinge {
@@ -148,25 +148,35 @@ main {
   pointer-events: none;
 }
 
+#indicatorSec {
+  width: 800px; /* same with bar width */
+  height: 100%;
+  position: relative;
+}
+
 #indicatorDiv {
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: 0.6;
-  top: 35%;
-  min-height: 200px;
+  opacity: 0.3;
+  top: 25%;
+  min-height: 235px;
+  left: 0;
 }
 
 #weightInd {
+  position: absolute;
+  background-color: magenta;
   border-radius: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 20px;
-  border: 1px white solid;
-  flex-grow: 0;
-  background-color: magenta;
+  font-size: small;
+  box-sizing: content-box;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 #lineInd {

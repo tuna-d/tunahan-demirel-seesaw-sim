@@ -4,6 +4,8 @@ const leftWeightInfo = document.getElementById("leftWeight")
 const nextWeightInfo = document.getElementById("nextWeight")
 const rightWeightInfo = document.getElementById("rightWeight")
 const tiltAngleInfo = document.getElementById("tiltAngle")
+const indicatorDiv = document.getElementById("indicatorDiv")
+const weightInd = document.getElementById("weightInd")
 
 let kg
 let leftKg = 0
@@ -34,9 +36,20 @@ bar.addEventListener("click", (e) => {
   rightWeightInfo.innerHTML = `${rightKg} kg`
 
   createWeight(kg, dist)
+  createIndicator(kg, dist)
 
   tiltBar(rightTor, leftTor)
   randomKg()
+})
+
+const barBound = bar.getBoundingClientRect()
+
+simSec.addEventListener("mousemove", (e) => {
+  const relativePos = e.clientX - barBound.left
+
+  const dist = Math.max(0, Math.min(relativePos, barBound.width))
+
+  createIndicator(kg, dist)
 })
 
 function setKg(value) {
@@ -77,4 +90,15 @@ function tiltBar(rightTorque, leftTorque) {
   bar.style.transition = `transform ${tiltDuration}ms ease`
 
   tiltAngleInfo.innerHTML = `${parseInt(angle, 10)}°`
+}
+
+function createIndicator(weight, position) {
+  weightInd.innerHTML = `${weight} kg`
+
+  const diameter = weight * 10
+
+  weightInd.style.width = `${diameter}px`
+  weightInd.style.height = `${diameter}px`
+
+  indicatorDiv.style.left = `${position}px`
 }
