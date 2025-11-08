@@ -7,7 +7,39 @@
     <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
-    <h1>Seesaw Simulator</h1>
+    <nav>
+      <h1>Seesaw Simulator</h1>
+    </nav>
+
+    <main>
+      <section id="simSec">
+        <section id="infoSec">
+          <div id="infoDiv">
+            <span>Left Weight</span><span id="leftWeight">0 kg</span>
+          </div>
+          <div id="infoDiv">
+            <span>Next Weight</span><span id="nextWeight">0 kg</span>
+          </div>
+          <div id="infoDiv">
+            <span>Right Weight</span><span id="rightWeight">0 kg</span>
+          </div>
+          <div id="infoDiv">
+            <span>Tilt Angle</span><span id="tiltAngle">0°</span>
+          </div>
+        </section>
+
+        <section id="seesawSec">
+          <div id="bar">
+            <div id="hinge"></div>
+          </div>
+
+          <div id="fulcrum"></div>
+        </section>
+      </section>
+
+      <section id="options"></section>
+    </main>
+
     <script src="./script/app.js"></script>
   </body>
 </html>
