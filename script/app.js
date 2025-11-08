@@ -5,9 +5,25 @@ const nextWeightInfo = document.getElementById("nextWeight")
 const rightWeightInfo = document.getElementById("rightWeight")
 const tiltAngleInfo = document.getElementById("tiltAngle")
 const indicatorDiv = document.getElementById("indicatorDiv")
+const indicatorSec = document.getElementById("indicatorSec")
 const weightInd = document.getElementById("weightInd")
+const lineInd = document.getElementById("lineInd")
+
+const colors = [
+  "#fbf8cc",
+  "#fde4cf",
+  "#ffcfd2",
+  "#f1c0e8",
+  "#cfbaf0",
+  "#a3c4f3",
+  "#90dbf4",
+  "#8eecf5",
+  "#98f5e1",
+  "#b9fbc0",
+]
 
 let kg
+let color
 let leftKg = 0
 let leftTor = 0
 
@@ -17,8 +33,10 @@ let rightTor = 0
 let angle = 0
 
 randomKg()
+colorPicker()
 
-const midPoint = bar.getBoundingClientRect().width / 2
+const barBound = bar.getBoundingClientRect()
+const midPoint = barBound.width / 2
 
 bar.addEventListener("click", (e) => {
   const dist = e.offsetX
@@ -35,21 +53,19 @@ bar.addEventListener("click", (e) => {
   leftWeightInfo.innerHTML = `${leftKg} kg`
   rightWeightInfo.innerHTML = `${rightKg} kg`
 
-  createWeight(kg, dist)
-  createIndicator(kg, dist)
+  createWeight(kg, dist, color)
+  createIndicator(kg, dist, color)
 
   tiltBar(rightTor, leftTor)
   randomKg()
 })
-
-const barBound = bar.getBoundingClientRect()
 
 simSec.addEventListener("mousemove", (e) => {
   const relativePos = e.clientX - barBound.left
 
   const dist = Math.max(0, Math.min(relativePos, barBound.width))
 
-  createIndicator(kg, dist)
+  createIndicator(kg, dist, color)
 })
 
 function setKg(value) {
@@ -62,7 +78,7 @@ function randomKg() {
   setKg(randKg)
 }
 
-function createWeight(weight, position) {
+function createWeight(weight, position, color) {
   const weightDiv = document.createElement("div")
   weightDiv.classList.add("weightDiv")
 
@@ -74,10 +90,12 @@ function createWeight(weight, position) {
 
   weightDiv.style.height = `${diameter}px`
   weightDiv.style.width = `${diameter}px`
+  weightDiv.style.backgroundColor = color
 
   weightDiv.style.left = `${position - totalSize / 2}px`
 
   bar.appendChild(weightDiv)
+  colorPicker()
 }
 
 function tiltBar(rightTorque, leftTorque) {
@@ -92,13 +110,21 @@ function tiltBar(rightTorque, leftTorque) {
   tiltAngleInfo.innerHTML = `${parseInt(angle, 10)}°`
 }
 
-function createIndicator(weight, position) {
+function createIndicator(weight, position, color) {
+  indicatorSec.classList.remove("hideIndicator")
   weightInd.innerHTML = `${weight} kg`
 
   const diameter = weight * 10
 
   weightInd.style.width = `${diameter}px`
   weightInd.style.height = `${diameter}px`
+  weightInd.style.backgroundColor = color
+  lineInd.style.backgroundColor = color
 
   indicatorDiv.style.left = `${position}px`
+}
+
+function colorPicker() {
+  const randNum = Math.floor(Math.random() * colors.length)
+  color = colors[randNum]
 }

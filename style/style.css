@@ -136,7 +136,6 @@ main {
 
 .weightDiv {
   position: absolute;
-  background-color: orange;
   border-radius: 100%;
   display: flex;
   align-items: center;
@@ -167,7 +166,6 @@ main {
 
 #weightInd {
   position: absolute;
-  background-color: magenta;
   border-radius: 100%;
   display: flex;
   align-items: center;
@@ -183,5 +181,8 @@ main {
   width: 2px;
   height: 60px;
   flex-grow: 1;
-  background-color: magenta;
+}
+
+.hideIndicator {
+  visibility: hidden;
 }
