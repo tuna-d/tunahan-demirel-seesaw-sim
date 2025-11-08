@@ -11,6 +11,7 @@ const lineInd = document.getElementById("lineInd")
 const switchDiv = document.getElementById("switch")
 const toggleDiv = document.getElementById("toggle")
 const slider = document.getElementById("slider")
+const weightList = document.getElementById("weightList")
 
 const colors = [
   "#fbf8cc",
@@ -50,9 +51,11 @@ bar.addEventListener("click", (e) => {
   if (dist > midPoint) {
     rightKg += kg
     rightTor += distDiff * kg
+    createWeightListItem(kg, distDiff, "right")
   } else if (dist < midPoint) {
     leftKg += kg
     leftTor += distDiff * kg
+    createWeightListItem(kg, distDiff, "left")
   }
 
   leftWeightInfo.innerHTML = `${leftKg} kg`
@@ -165,4 +168,10 @@ function updateIndicatorPos(e) {
 
   const indicatorPos = Math.max(0, Math.min(relativePos, barBound.width))
   return indicatorPos
+}
+
+function createWeightListItem(kg, distance, side) {
+  const listItem = document.createElement("li")
+  listItem.innerHTML = `${kg} kg weight placed on the ${side} side, ${distance}px from the center.`
+  weightList.appendChild(listItem)
 }

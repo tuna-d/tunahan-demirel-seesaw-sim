@@ -245,3 +245,22 @@ main {
   padding: 2rem 4rem;
   justify-content: center;
 }
+
+#listSec {
+  height: 25%;
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  position: absolute;
+  width: 25vw;
+  left: 0;
+  padding: 2rem 2rem;
+}
+
+#weightList {
+  transform: rotate(180deg);
+}
+#weightList li {
+  transform: rotate(-180deg);
+}
