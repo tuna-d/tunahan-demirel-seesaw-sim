@@ -54,17 +54,16 @@ bar.addEventListener("click", (e) => {
   rightWeightInfo.innerHTML = `${rightKg} kg`
 
   createWeight(kg, dist, color)
-  createIndicator(kg, dist, color)
+
+  const indPos = updateIndicatorPos(e)
+  createIndicator(kg, indPos, color)
 
   tiltBar(rightTor, leftTor)
   randomKg()
 })
 
 simSec.addEventListener("mousemove", (e) => {
-  const relativePos = e.clientX - barBound.left
-
-  const dist = Math.max(0, Math.min(relativePos, barBound.width))
-
+  const dist = updateIndicatorPos(e)
   createIndicator(kg, dist, color)
 })
 
@@ -127,4 +126,11 @@ function createIndicator(weight, position, color) {
 function colorPicker() {
   const randNum = Math.floor(Math.random() * colors.length)
   color = colors[randNum]
+}
+
+function updateIndicatorPos(e) {
+  const relativePos = e.clientX - barBound.left
+
+  const indicatorPos = Math.max(0, Math.min(relativePos, barBound.width))
+  return indicatorPos
 }
