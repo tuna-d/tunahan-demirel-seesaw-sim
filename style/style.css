@@ -45,30 +45,6 @@ select {
   font: inherit;
 }
 
-/* 8. Avoid text overflows */
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-/* 9. Improve line wrapping */
-p {
-  text-wrap: pretty;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
-}
-
 /*
   10. Create a root stacking context
 */
@@ -122,6 +98,7 @@ main {
   justify-content: end;
   align-items: center;
   padding-bottom: 6rem;
+  user-select: none;
 }
 
 #bar {
@@ -154,4 +131,17 @@ main {
   border-bottom: 120px solid black;
   transform: translateY(-12.5px);
   z-index: 1;
+}
+
+.weightDiv {
+  position: absolute;
+  background-color: orange;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: small;
+  box-sizing: content-box;
+  white-space: nowrap;
 }
