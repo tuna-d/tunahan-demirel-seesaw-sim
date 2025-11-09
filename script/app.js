@@ -38,8 +38,88 @@ let angle = 0
 
 let randomWeightsOpt = true
 
-randomKg()
 colorPicker()
+
+const stateKey = "seesawState"
+
+function saveState() {
+  const weightsArray = Array.from(bar.querySelectorAll(".weightDiv")).map(
+    (node) => {
+      const kg = parseInt(node.textContent, 10) || 0
+      const leftPx = parseFloat(node.style.left) || 0
+      const diameter = kg * 10
+      const padding = 20
+      const totalSize = diameter + padding * 2
+      const position = leftPx + totalSize / 2
+      const distDiff = Math.abs(position - midPoint)
+      const side = position > midPoint ? "right" : "left"
+      return {
+        kg: kg,
+        position,
+        side,
+        color: node.style.backgroundColor,
+        distDiff,
+      }
+    }
+  )
+
+  const state = {
+    leftKg,
+    rightKg,
+    leftTor,
+    rightTor,
+    angle,
+    randomWeightsOpt,
+    sliderValue: parseInt(slider.value, 10),
+    weights: weightsArray,
+  }
+
+  localStorage.setItem(stateKey, JSON.stringify(state))
+}
+
+function loadState() {
+  try {
+    const data = localStorage.getItem(stateKey)
+    if (!data) {
+      randomKg()
+      updateInfoLabels()
+      setToggle(true)
+      return
+    }
+
+    const parsedData = JSON.parse(data)
+
+    leftKg = parsedData.leftKg
+    rightKg = parsedData.rightKg
+    leftTor = parsedData.leftTor
+    rightTor = parsedData.rightTor
+    angle = parsedData.angle
+    randomWeightsOpt = parsedData.randomWeightsOpt
+    slider.value = parsedData.sliderValue
+
+    setToggle(randomWeightsOpt)
+    slider.disabled = randomWeightsOpt
+
+    Array.from(bar.querySelectorAll(".weightDiv")).forEach((node) =>
+      node.remove()
+    )
+    weightList.innerHTML = ""
+
+    parsedData.weights.forEach((weight) => {
+      createWeight(weight.kg, weight.position, weight.color)
+      createWeightListItem(weight.kg, weight.distDiff, weight.side)
+    })
+
+    applyTiltOnly(angle)
+    updateInfoLabels()
+    randomWeightsOpt ? randomKg() : sliderKg()
+  } catch (e) {
+    console.log(e)
+    randomKg()
+    updateInfoLabels()
+    setToggle(true)
+  }
+}
 
 const barBound = bar.getBoundingClientRect()
 const midPoint = barBound.width / 2
@@ -68,6 +148,7 @@ bar.addEventListener("click", (e) => {
 
   tiltBar(rightTor, leftTor)
   randomWeightsOpt ? randomKg() : sliderKg()
+  saveState()
 })
 
 simSec.addEventListener("mousemove", (e) => {
@@ -88,11 +169,14 @@ toggleDiv.addEventListener("click", (e) => {
   } else {
     sliderKg()
   }
+
+  saveState()
 })
 
 slider.addEventListener("input", (e) => {
   if (!randomWeightsOpt) {
     sliderKg()
+    saveState()
   }
 })
 
@@ -175,3 +259,26 @@ function createWeightListItem(kg, distance, side) {
   listItem.innerHTML = `${kg} kg weight placed on the ${side} side, ${distance}px from the center.`
   weightList.appendChild(listItem)
 }
+
+function updateInfoLabels() {
+  leftWeightInfo.innerHTML = `${leftKg} kg`
+  rightWeightInfo.innerHTML = `${rightKg} kg`
+  tiltAngleInfo.innerHTML = `${parseInt(angle, 10)}°`
+}
+
+function setToggle(isRandomOn) {
+  if (isRandomOn) {
+    toggleDiv.classList.add("toggleOn")
+    switchDiv.classList.add("switchOn")
+  } else {
+    toggleDiv.classList.remove("toggleOn")
+    switchDiv.classList.remove("switchOn")
+  }
+}
+
+function applyTiltOnly(angle) {
+  bar.style.transition = "none"
+  bar.style.transform = `rotate(${angle}deg)`
+}
+
+loadState()
