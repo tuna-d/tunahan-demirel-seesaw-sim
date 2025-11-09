@@ -27,10 +27,15 @@ All states (weights, torque values, toggle status) are stored in `localStorage` 
 ## ⚙️ Core Features
 
 ✅ **Interactive physics** – click to drop weights and tilt the seesaw
+
 ✅ **Random or fixed weights** – toggle random mode or set a specific weight with the slider
+
 ✅ **Live UI updates** – shows left/right total weights, next weight, and current tilt angle
+
 ✅ **Persistent state** – automatically saves data using `localStorage`
+
 ✅ **Smooth tilt animation** – transition timing depends on torque difference
+
 ✅ **Reset button** – clears all weights and resets tilt
 
 ## ⚖️ Trade-offs & Limitations
