@@ -90,7 +90,7 @@ main {
   margin-top: 2rem;
 }
 
-#infoDiv {
+.infoCard {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -102,7 +102,7 @@ main {
   background-color: #fb9649;
 }
 
-#infoDiv span {
+.infoCard span {
   color: #f8d9c6;
   font-weight: 500;
 }
