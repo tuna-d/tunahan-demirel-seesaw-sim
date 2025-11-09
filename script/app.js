@@ -212,10 +212,15 @@ function createWeight(weight, position, color) {
   weightDiv.style.height = `${diameter}px`
   weightDiv.style.width = `${diameter}px`
   weightDiv.style.backgroundColor = color
+  weightDiv.style.transform = "translateY(-150px)"
 
   weightDiv.style.left = `${position - totalSize / 2}px`
 
   bar.appendChild(weightDiv)
+
+  setTimeout(() => {
+    weightDiv.style.transform = "translateY(0px)"
+  }, 0)
   colorPicker()
 }
 

@@ -145,6 +145,7 @@ main {
   box-sizing: content-box;
   white-space: nowrap;
   pointer-events: none;
+  transition: transform ease-in 250ms;
 }
 
 #indicatorSec {
