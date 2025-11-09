@@ -3,6 +3,9 @@
 A simple **physics-based seesaw simulation** built with **pure JavaScript, HTML, and CSS**.
 Drop weights directly onto the plank and watch the seesaw tilt based on real torque logic — no frameworks, just clean DOM and math.
 
+🌐 **Live Demo:** [https://tuna-d.github.io/tunahan-demirel-seesaw-sim/](https://tuna-d.github.io/tunahan-demirel-seesaw-sim/)
+💾 **Repository:** [https://github.com/tuna-d/tunahan-demirel-seesaw-sim](https://github.com/tuna-d/tunahan-demirel-seesaw-sim)
+
 ## 🧠 Thought Process & Design
 
 The goal was to replicate the physical behavior of a real seesaw in a browser environment.
