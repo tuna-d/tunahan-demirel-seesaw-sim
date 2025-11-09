@@ -12,6 +12,7 @@ const switchDiv = document.getElementById("switch")
 const toggleDiv = document.getElementById("toggle")
 const slider = document.getElementById("slider")
 const weightList = document.getElementById("weightList")
+const resetBtn = document.getElementById("resetBtn")
 
 const colors = [
   "#fbf8cc",
@@ -180,6 +181,8 @@ slider.addEventListener("input", (e) => {
   }
 })
 
+resetBtn.addEventListener("click", reset)
+
 function setKg(value) {
   kg = value
   nextWeightInfo.innerHTML = `${kg} kg`
@@ -279,6 +282,30 @@ function setToggle(isRandomOn) {
 function applyTiltOnly(angle) {
   bar.style.transition = "none"
   bar.style.transform = `rotate(${angle}deg)`
+}
+
+function reset() {
+  localStorage.removeItem(stateKey)
+
+  leftKg = 0
+  rightKg = 0
+  leftTor = 0
+  rightTor = 0
+  angle = 0
+  randomWeightsOpt = true
+
+  Array.from(bar.querySelectorAll(".weightDiv")).forEach((node) =>
+    node.remove()
+  )
+  weightList.innerHTML = ""
+
+  indicatorSec.classList.add("hideIndicator")
+
+  applyTiltOnly(0)
+  setToggle(true)
+  slider.disabled = true
+  randomKg()
+  updateInfoLabels()
 }
 
 loadState()

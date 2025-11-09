@@ -264,3 +264,8 @@ main {
 #weightList li {
   transform: rotate(-180deg);
 }
+
+#resetBtn {
+  width: 50%;
+  margin-top: 1rem;
+}
