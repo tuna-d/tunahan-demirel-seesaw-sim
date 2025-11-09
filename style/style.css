@@ -25,6 +25,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Inter", sans-serif;
 }
 
 /* 6. Improve media defaults */
@@ -57,8 +58,14 @@ nav {
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: cadetblue;
   padding: 1rem 2rem;
+  background-color: #ffb57d;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+nav h1 {
+  font-weight: 600;
+  color: #4f518c;
 }
 
 main {
@@ -66,31 +73,41 @@ main {
   align-items: center;
   justify-content: center;
   flex: 1;
+  background-color: #f8d9c6;
 }
 
 #simSec {
   width: 50vw;
   height: 80vh;
-  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 2rem;
+  background-color: #9d53ff;
 }
 
 #infoSec {
   display: flex;
   justify-content: space-around;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 #infoDiv {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border: 1px solid black;
   font-size: larger;
-  min-width: 150px;
+  min-width: 180px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  background-color: #fb9649;
+}
+
+#infoDiv span {
+  color: #f8d9c6;
+  font-weight: 500;
 }
 
 #seesawSec {
-  border: 1px solid black;
   height: 75%;
   margin-top: 2rem;
   display: flex;
@@ -104,7 +121,7 @@ main {
 #bar {
   width: 800px;
   height: 25px;
-  background-color: brown;
+  background-color: #f94144;
   border-radius: 1rem;
   display: flex;
   position: relative;
@@ -117,7 +134,7 @@ main {
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  background-color: black;
+  background-color: #2c2a4a;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -129,7 +146,7 @@ main {
   height: 0;
   border-left: 60px solid transparent;
   border-right: 60px solid transparent;
-  border-bottom: 120px solid black;
+  border-bottom: 120px solid #2c2a4a;
   transform: translateY(-12.5px);
   z-index: 1;
 }
@@ -141,11 +158,12 @@ main {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  font-size: small;
   box-sizing: content-box;
   white-space: nowrap;
   pointer-events: none;
   transition: transform ease-in 250ms;
+  border: 1px solid #f8d9c6;
+  color: #2c2a4a;
 }
 
 #indicatorSec {
@@ -221,30 +239,38 @@ main {
 
 #randomWeight {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 #randomWeight span {
   user-select: none;
+  color: white;
+  font-size: larger;
 }
 
 #slider {
-  width: 50%;
-  accent-color: orange;
+  accent-color: #fb9649;
+  margin-top: 1rem;
 }
 
 #sliderForm {
   user-select: none;
 }
 #options {
-  height: 80vh;
-  width: 25vw;
+  width: 24vw;
   position: absolute;
   right: 0;
+  margin-right: 0.5rem;
   display: flex;
   flex-direction: column;
   padding: 2rem 4rem;
   justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 2rem;
+  background-color: #f28482;
+  height: 25%;
 }
 
 #listSec {
@@ -254,9 +280,13 @@ main {
   scroll-behavior: smooth;
   scrollbar-width: none;
   position: absolute;
-  width: 25vw;
+  width: 24vw;
   left: 0;
-  padding: 2rem 2rem;
+  margin-left: 0.5rem;
+  padding: 1rem 2rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 2rem;
+  background-color: #f28482;
 }
 
 #weightList {
@@ -264,9 +294,27 @@ main {
 }
 #weightList li {
   transform: rotate(-180deg);
+  color: white;
 }
 
 #resetBtn {
   width: 50%;
   margin-top: 1rem;
+  font-size: x-large;
+  border: none;
+  border-radius: 2rem;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background-color: #f94144;
+  padding: 0.5rem 0;
+  transition: background-color ease-in-out 200ms;
+  transition: scale ease-in-out 150ms;
+}
+
+#resetBtn:hover {
+  background-color: #e63946;
+}
+
+#resetBtn:active {
+  scale: 0.95;
 }
